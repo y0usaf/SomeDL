@@ -8,21 +8,15 @@
 ## High Priority 
 - Inside album guess the album name gets inevitably overwritten!!!!!!!! Even if the song is not found in the album by youtube!!! This must be fixed, if yt does not find it, either leaf the track number blank but use the albums art and name, OR treat it as a single. NOT BOTH
 - Create this list
-- TEST: TEST If explicit videos get downloaded. maybe also thest on a VM/on laptop
-- BUG: if a search would ever not return a album, or an empty album, the program will crash. prevent that if possible
-- TODO: implement song_title_clean for deezer
-- BUG: Still have to properly implement failed_list and make try .. except for the whole getSong function in production
 - TODO: test with manufactured api results as inputs
-- Write a proper readme!!
+- Enable support for other formats like flac
 
 ## Medium Priority
 - Create Flowchart
-- Implement duration statistic - How long each song takes to download
 - Metadata: Add Album Artist
 - Metadata: Add Encoding stuff maybe
 - Metadata: Add WOAR. Artist website or the streaming websites. MusicBrainz webiste seems to have links, havent found in the api response yet, gotta look
 - User configurable id3 version
-- Enable support for shortened Youtube links like https://youtu.be/R7o_-8RSrPA?si=q-vq29lIVhjoTnMc
 - FEAT: Give an option to download an entire album (--album flag)
 - FEAT: Give an option to download everything from an artist (--artist flag)
 - Add lyrics.ovh as lyrics API if youtube fails

@@ -16,7 +16,7 @@ import argparse
 import logging
 from yt_dlp.utils import DownloadError
 
-VERSION = "0.2.1"
+VERSION = "0.2.2"
 
 class ColoredFormatter(logging.Formatter):
 
@@ -497,7 +497,8 @@ def getSong(query: str = None, url: str = None, known_metadata: list = [], prefe
         metadata["video_type"] =        search_results.get("videoType",  "No video type found") # --- ("MUSIC_VIDEO_TYPE_ATV" - official audio | "MUSIC_VIDEO_TYPE_OMV" - official music video)
         metadata["yt_url"] =            f'https://music.youtube.com/watch?v={metadata["song_id"]}'
 
-    new_filename = f'{metadata["artist_name"]} - {metadata["song_title"]}.mp3'
+    sanitized_query = sanitize(f'{metadata["artist_name"]} - {metadata["song_title"]}')
+    new_filename = f'{sanitized_query}.mp3'
     new_file_path = Path.cwd() / new_filename
 
     if new_file_path.is_file():
@@ -777,7 +778,7 @@ def downloadSong(videoID: str, artist: str, song: str):
     #URLS = ['https://music.youtube.com/watch?v=hComisqDS1I']
     URLS = f'https://music.youtube.com/watch?v={videoID}'
     #URLS = f'https://www.youtube.com/watch?v=-X8Olge799M'
-    output_template = f'{artist} - {song}'
+    output_template = sanitize(f'{artist} - {song}')
 
     ydl_opts = {
         'format': 'bestaudio/best',
@@ -1473,6 +1474,11 @@ dummy_metadata = {
     "yt_url": "https://music.youtube.com/watch?v=3J8VwHPRyN8"
 }
 
+
+def sanitize(filename):
+    # Define a whitelist of allowed characters (alphanumeric, spaces, hyphens, underscores, etc.)
+    filename = re.sub(r'[<>:"/\\|?*\x00-\x1F]', '_', filename)
+    return filename
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "SomeDL"
-version = "0.2.1"
+version = "0.2.2"
 authors = [
     {name="ChemistryGull", email="html.gull@gmail.com"},
 ]
@@ -19,8 +19,7 @@ dependencies = [
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-    "Development Status :: 3 - Alpha",
+    "Operating System :: OS Independent"
 ]
 license = "GPL-3.0-only"
 license-files = ["LICEN[CS]E*"]

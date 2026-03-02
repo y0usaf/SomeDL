@@ -1,6 +1,13 @@
 # Changelog
 https://keepachangelog.com/en/1.1.0/
 
+## [0.2.2] - 2026.03.02
+
+### Fixed
+- Fix problem with invalid file name characters (?*"/\ etc) on windows, where it would throw an error when one of these characters are present in the file name. With a simple sanitize fuction, these characters are now replaced with underscores _
+
+
+
 ## [0.2.1] - 2026.02.27
 ### Changed
 - Changed deezer warnings to log.warning and log.error instead of print statements
