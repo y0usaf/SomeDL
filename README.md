@@ -22,6 +22,14 @@ This is a simple commandline program to download music with the correct metadata
     - ISRC
     - MusicBrainz artist ID (MBID)
 
+## Proposed Features
+- [ ] User configuration file (*currently working on*)
+- [ ] Custom output template, including option to sort into folders, like `{artist}/{album}/{track_number} - {title}.{ext}` (*currently working on*)
+- [ ] Default download folder (*currently working on*)
+- [ ] Set download codec/container format and audio quality (*coming soon*)
+- [ ] Fallback lyrics source
+- [ ] Parallel downloads
+
 # Usage
 Simply type `somedl` followed by your search query in quotes.
 ```
