@@ -26,7 +26,8 @@ This is a simple commandline program to download music with the correct metadata
 - [ ] User configuration file (*currently working on*)
 - [ ] Custom output template, including option to sort into folders, like `{artist}/{album}/{track_number} - {title}.{ext}` (*currently working on*)
 - [ ] Default download folder (*currently working on*)
-- [ ] Set download codec/container format and audio quality (*coming soon*)
+- [ ] Configuring download codec/container format and audio quality (*coming soon*)
+- [ ] Give option to download every song from an album automatically. (*coming soon*)
 - [ ] Fallback lyrics source
 - [ ] Parallel downloads
 
