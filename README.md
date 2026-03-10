@@ -167,7 +167,7 @@ ERROR - yt-dlp download failed. Do you have ffmpeg installed? Is the song https:
 ERROR - File was not downloaded successfully with yt-dlp
 WARNING - Song was not downloaded properly (or file does already exist)
 ```
-Like mentioned in the error message, this song is age-restricted. Visit [How do I download age restricted songs?](how-do-i-download-age-restricted-songs) on how to download age-restricted content.
+Like mentioned in the error message, this song is age-restricted. Visit [How do I download age restricted songs?](#how-do-i-download-age-restricted-songs) on how to download age-restricted content.
 
 
 
