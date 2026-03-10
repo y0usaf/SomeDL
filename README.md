@@ -7,28 +7,24 @@ This is a simple commandline program to download music with the correct metadata
 
 # Features
 - Simple usage
+- Download via search query, YouTube URL or YouTube Playlist URL
 - Simple installation (And [quick guides](#requirements) for the installation of the dependencies)
 - No login or API tokens required
 - Complete metadata - way better than just relying on yt-dlp (see [here](#why-should-i-use-somedl-over-yt-dlp) why)
-    - Song title
-    - Artist name
-    - Album name
-    - High quality cover art (544x544)
-    - Release date (Year)
-    - Track number
-    - Genre
-    - Lyrics
-    - Copyright/Label
-    - ISRC
-    - MusicBrainz artist ID (MBID)
+``` 
+Song title | Artist name | Album name | High quality cover art (544x544) | Release date (Year) | Track number | Genre | Lyrics | Copyright/Label | ISRC | MusicBrainz artist ID (MBID)
+```
+- Different output formats: `opus, m4a, mp3, ogg`
+- Sort downloads automatically into folders according to a template if desired
+    - For example: `{artist}/{artist} - {song}`
+    - Or more complex: `{artist}/{year} - {album}/{track_pos} - {song}`
+- User configuration file
+- Download report - get a quick overview over the downloaded songs, including their metadata.
 
 ## Proposed Features
-- [ ] User configuration file (*currently working on*)
-- [ ] Custom output template, including option to sort into folders, like `{artist}/{album}/{track_number} - {title}.{ext}` (*currently working on*)
-- [ ] Default download folder (*currently working on*)
-- [ ] Configuring download codec/container format and audio quality (*coming soon*)
 - [ ] Give option to download every song from an album automatically. (*coming soon*)
 - [ ] Fallback lyrics source
+- [ ] Update metadata in existing files
 - [ ] Parallel downloads
 
 # Usage
@@ -132,7 +128,7 @@ WARNING - Fetching MusicBrainz song failed. Continuing without MusicBrainz metad
 If MusicBrainz cannot find that artist, this warning appears. No genre data is added.
 
 ```
-WARNING - MusicBrainz has found no genre
+WARNING - This artist does not have any genre set on MusicBrainz
 ```
 
 MusicBrainz does not have any genre tags for that artist. Visit [this section](#why-is-the-wrong-genreno-genre-set) on how to add this data to MusicBrainz yourself.
@@ -141,3 +137,37 @@ MusicBrainz does not have any genre tags for that artist. Visit [this section](#
 WARNING - DEEZER API returned no results. Continuing without Deezer metadata (ISRC, Label)
 ```
 Deezer has not found the song. This may be because of some different spelling or other reaseons. The download will continue without ISRC and music label data.
+
+#### YT-DLP specific warnigs:
+
+```
+WARNING: [youtube] No supported JavaScript runtime could be found. Only deno is enabled by default; to use another runtime add –js-runtimes RUNTIME[:PATH] to your command/config. YouTube extraction without a JS runtime has been deprecated, and some formats may be missing. See https://github.com/yt-dlp/yt-dlp/wiki/EJS for details on installing one
+```
+This warning appears if Deno is not installed properly. Visit [this section](#deno) on how to install deno. 
+
+```
+WARNING: [youtube] xHcPUTfPuk0: Some android_vr client https formats have been skipped as they are missing a URL. YouTube may have enabled the SABR-only streaming experiment for the current session. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+```
+YouTube is experimenting with different streaming URLs. Random sessions seem to be picked for these experiments, which leads to this warning. This results in no audio-only file being provided, so yt-dlp has to download the video version and extract the audio. Because of the larger file size (15-35 MiB instad of 3-6 MiB), the download will take a bit longer for that song. But besides that, the song will still be downloaded normally.
+
+```
+ERROR: Did not get any data blocks
+```
+Sometimes following the warning above. yt-dlp fixes such data issues automatically in most cases, so the song will still be downloaded as normal. 
+
+```
+WARNING: [youtube] [jsc] JS Challenge Provider "deno" returned an invalid response:         response = JsChallengeProviderResponse(request=JsChallengeRequest(type=<JsChallengeType.N: 'n'>, input=NChallengeInput(player_url='https://www.youtube.com/s/player/44899b31/tv-player-ias.vflset/tv-player-ias.js', challenges=['14UbMsOV98OEGPIp1T', '4pHgHqt9lVyQYPVlqs', 'eiQkCMjDm5lNTLFEjf']), video_id='kpxfGeyma1E'), response=None, error='no solutions')
+         Please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+```
+This and similar warnings are usually caused by canges by YouTube. The yt-dlp team deals with these problems, updating to the newest yt-dlp version may fix these problems. Usually this will not significally affect song download.
+
+```
+ERROR: [youtube] G0rQKudItF4: Sign in to confirm your age. This video may be inappropriate for some users. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+ERROR - yt-dlp download failed. Do you have ffmpeg installed? Is the song https://music.youtube.com/watch?v=G0rQKudItF4 age restricted?: ERROR: [youtube] G0rQKudItF4: Sign in to confirm your age. This video may be inappropriate for some users. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+ERROR - File was not downloaded successfully with yt-dlp
+WARNING - Song was not downloaded properly (or file does already exist)
+```
+Like mentioned in the error message, this song is age-restricted. Visit [How do I download age restricted songs?](how-do-i-download-age-restricted-songs) on how to download age-restricted content.
+
+
+
