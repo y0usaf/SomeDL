@@ -251,8 +251,17 @@ fn resolve_song_info(
         }
     }
 
-    // Text query or fallback search
+    // Text query or fallback search.
+    // For URL inputs where the watch playlist gave us bad metadata (no album_id),
+    // ask yt-dlp for the video's own title — it's more reliable than the uploader
+    // channel name that the watch playlist returns as "artist".
     let query = song.text_query.clone().or_else(|| {
+        if let Some(video_id) = &song.original_url_id {
+            if let Some(title) = get_video_title_from_ytdlp(video_id) {
+                log::info!("Using yt-dlp title as search query: {title}");
+                return Some(title);
+            }
+        }
         song.prefetched.as_ref().map(|p| {
             if !p.artist_name.is_empty() && !p.song_title.is_empty() {
                 format!("{} - {}", p.artist_name, p.song_title)
@@ -440,6 +449,34 @@ fn fetch_musicbrainz(
     }
 
     (genre, Some(mb_id))
+}
+
+/// Ask yt-dlp for the video's own title without downloading anything.
+/// Much more reliable than the watch playlist uploader-as-artist hack for
+/// regular (non-YTM) YouTube URLs.
+fn get_video_title_from_ytdlp(video_id: &str) -> Option<String> {
+    let url = format!("https://www.youtube.com/watch?v={video_id}");
+    let out = std::process::Command::new("yt-dlp")
+        .args(["--print", "%(artist)s - %(title)s", "--no-download", "--quiet", &url])
+        .output()
+        .ok()?;
+
+    let raw = String::from_utf8_lossy(&out.stdout).trim().to_string();
+
+    // If artist metadata is empty yt-dlp prints " - Title" or "NA - Title"
+    let title = if raw.starts_with("NA - ") || raw.starts_with(" - ") {
+        // Fall back to just the title
+        let url2 = format!("https://www.youtube.com/watch?v={video_id}");
+        let out2 = std::process::Command::new("yt-dlp")
+            .args(["--print", "%(title)s", "--no-download", "--quiet", &url2])
+            .output()
+            .ok()?;
+        String::from_utf8_lossy(&out2.stdout).trim().to_string()
+    } else {
+        raw
+    };
+
+    if title.is_empty() { None } else { Some(title) }
 }
 
 fn fetch_deezer(
