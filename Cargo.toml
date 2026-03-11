@@ -1,0 +1,27 @@
+[package]
+name = "somedl"
+version = "1.0.0"
+edition = "2021"
+description = "Download songs from YouTube with rich metadata from MusicBrainz, Genius, and Deezer"
+license = "GPL-3.0-only"
+
+[[bin]]
+name = "somedl"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+reqwest = { version = "0.12", features = ["json", "blocking"] }
+lofty = "0.22"
+url = "2"
+regex = "1"
+glob = "0.3"
+log = "0.4"
+env_logger = "0.11"
+anyhow = "1"
+dirs = "5"
+base64 = "0.22"
+chrono = "0.4"

@@ -7,4 +7,4 @@ dist/
 downloads/
 
 __pycache__/
-*.pyc
+*.pyc/target/
