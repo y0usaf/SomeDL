@@ -1,5 +1,5 @@
 [package]
-name = "somedl"
+name = "somedl-rs"
 version = "1.0.0"
 edition = "2021"
 description = "Download songs from YouTube with rich metadata from MusicBrainz, Genius, and Deezer"

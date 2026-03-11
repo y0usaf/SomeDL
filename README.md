@@ -1,4 +1,4 @@
-# SomeDL — Song+Metadata Downloader (Rust rewrite)
+# SomeDL-rs — Song+Metadata Downloader
 
 A command-line tool to download music from YouTube with rich metadata pulled
 from MusicBrainz (genre), Genius (album correction), and Deezer (ISRC, label).
@@ -62,9 +62,9 @@ OPTIONS:
 ## Configuration
 
 Run `somedl --generate-config` to create a config file at:
-- Linux: `~/.config/SomeDL/somedl_config.toml`
-- macOS: `~/Library/Application Support/SomeDL/somedl_config.toml`
-- Windows: `%APPDATA%\SomeDL\somedl_config.toml`
+- Linux: `~/.config/SomeDL-rs/somedl_config.toml`
+- macOS: `~/Library/Application Support/SomeDL-rs/somedl_config.toml`
+- Windows: `%APPDATA%\SomeDL-rs\somedl_config.toml`
 
 ## License
 

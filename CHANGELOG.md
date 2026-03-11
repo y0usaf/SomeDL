@@ -4,7 +4,7 @@ https://keepachangelog.com/en/1.1.0/
 
 ## [1.0.0] - 11.03.2026
 
-This is the first major version of SomeDL. Having all the neccessary core fuctionality, this is a great foundation for future features.
+This is the first major version of SomeDL-rs. Having all the neccessary core fuctionality, this is a great foundation for future features.
 
 In this update the codebase was refactored, a configuration system was added and support for different codecs/formats was added.
 

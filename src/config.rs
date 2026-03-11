@@ -138,7 +138,7 @@ pub fn config_path() -> PathBuf {
     } else {
         dirs::config_dir().unwrap_or_else(|| PathBuf::from(".").join(".config"))
     };
-    base.join("SomeDL").join("somedl_config.toml")
+    base.join("SomeDL-rs").join("somedl_config.toml")
 }
 
 pub fn load_config() -> Config {

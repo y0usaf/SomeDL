@@ -7,7 +7,7 @@ const MB_BASE: &str = "https://musicbrainz.org/ws/2";
 const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn user_agent() -> String {
-    format!("SomeDL/{VERSION} (html.gull@gmail.com)")
+    format!("SomeDL-rs/{VERSION} (html.gull@gmail.com)")
 }
 
 fn mb_get(client: &Client, url: &str, retries: u32) -> Option<Value> {
